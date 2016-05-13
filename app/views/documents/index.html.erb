@@ -1,7 +1,29 @@
 <div ng-app="myApp">
   <div class="container">
     <div ng-controller="docCtrl" ng-init="init()">
-      {{ name }}
+      <h1>DOX</h1>
+      <div class="row">
+        <input type="text" ng-model="newDoc.title" />
+        <button ng-click="create()">Create</button>
+      </div>
+      <div class="row">
+        <ul ng-repeat="doc in docs">
+          <li>
+            <a href="" ng-click="startEdit(doc)">{{ doc.title}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <h2>{{ editedDoc.title}}</h2>
+        <textarea ng-change="edit()" name="name" rows="8" cols="80" ng-model="editedDoc.body"></textarea>
+      </div>
+      <div class="row">
+        <ul ng-repeat="str in strs track by $index">
+          <li>
+          {{ str }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

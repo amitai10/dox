@@ -15,4 +15,6 @@
 //= require angular
 //= require turbolinks
 //= require main
+//= require cable
+//= require_tree ./channels
 //= require_tree .

@@ -2,7 +2,10 @@
 class DocumentsController < ApplicationController
 
   def index
-    # render json: Document.all
+  end
+
+  def docs
+    render json: Document.all
   end
 
   def show
@@ -10,12 +13,14 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    render json: Document.create!(doc_params)
+    render json: Document.create!(title: params[:title])
   end
 
-  private
-
-    def doc_params
-      params.require(:document).permit(:title)
-    end
+  def edit
+    doc = Document.find(params[:id])
+    doc.update!(body: params[:body]);
+    ActionCable.server.broadcast 'documents',
+        document: doc.body
+      head :ok
+  end
 end
